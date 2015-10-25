@@ -1,0 +1,96 @@
+﻿<Page
+    x:Class="UrlToolkit.View.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UrlToolkit.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uc="using:UrlToolkit.UserControls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!-- The datacontext for the window -->
+    <Page.DataContext>
+        <Binding Mode="OneWay" Source="{StaticResource viewModelLocator}" Path="About" d:IsDataSource="True" />
+    </Page.DataContext>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <uc:PageHeader x:Uid="PageHeaderAboutView" Grid.Row="0" />
+
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,0,19,0">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                        <TextBlock x:Uid="TextBlockTitleDeveloper" Style="{StaticResource TextBlockTitleStyle}" />
+                        <TextBlock x:Uid="TextBlockDeveloperName" Style="{StaticResource TextBlockStyle}" />
+                    </StackPanel>
+
+                    <TextBlock x:Uid="TextBlockTitleLibraries" Grid.Row="1" Style="{StaticResource TextBlockTitleStyle}" />
+                    <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                        <TextBlock x:Uid="TextBlockLibraries1" Style="{StaticResource TextBlockStyle}" />
+                        <TextBlock x:Uid="TextBlockLibraries2" Style="{StaticResource TextBlockStyle}" />
+                    </StackPanel>
+
+                    <TextBlock x:Uid="TextBlockTitleVersionHistory" Grid.Row="3" Style="{StaticResource TextBlockTitleStyle}" />
+                    <StackPanel Grid.Row="4" Margin="0,0,0,10">
+                        <TextBlock x:Uid="TextBlockVersion1_3_0_0"  Style="{StaticResource TextBlockSubtitleStyle}" FontWeight="Bold" />
+                        <TextBlock x:Uid="TextBlockVersion1_3_0_0_1" Style="{StaticResource TextBlockStyle}" />
+                        <TextBlock x:Uid="TextBlockVersion1_3_0_0_2" Style="{StaticResource TextBlockStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="5" Margin="0,0,0,10">
+                        <TextBlock x:Uid="TextBlockVersion1_2_0_0"  Style="{StaticResource TextBlockSubtitleStyle}" FontWeight="Bold" />
+                        <TextBlock x:Uid="TextBlockVersion1_2_0_0_1" Style="{StaticResource TextBlockStyle}" />
+                        <TextBlock x:Uid="TextBlockVersion1_2_0_0_2" Style="{StaticResource TextBlockStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="6" Margin="0,0,0,10">
+                        <TextBlock x:Uid="TextBlockVersion1_1_0_0"  Style="{StaticResource TextBlockSubtitleStyle}" FontWeight="Bold" />
+                        <TextBlock x:Uid="TextBlockVersion1_1_0_0_1" Style="{StaticResource TextBlockStyle}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="7" Margin="0,0,0,10">
+                        <TextBlock x:Uid="TextBlockInformation" Style="{StaticResource TextBlockImportantItemStyle}" 
+                                   TextWrapping="WrapWholeWords" />
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="AppBarButtonFeedback" Icon="Mail" Command="{Binding SendFeedbackCommand}" IsEnabled="True"/>
+            <AppBarButton x:Uid="AppBarButtonNote" Icon="Like" Command="{Binding RateAndReviewCommand}" IsEnabled="True"/>
+            <AppBarButton x:Uid="AppBarButtonShare" Command="{Binding ShareCommand}" IsEnabled="True">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/share.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>    
+</Page>

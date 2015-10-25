@@ -1,0 +1,12 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UrlToolkit.ResourceDictionaries"
+    xmlns:converter="using:UrlToolkit.Common.Converters"
+    x:Name="Converters">
+
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+    <converter:ContentLengthToVisibilityConverter x:Key="ContentLengthToVisibilityConverter" />
+
+</ResourceDictionary>

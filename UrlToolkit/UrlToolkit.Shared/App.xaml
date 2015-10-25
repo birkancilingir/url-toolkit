@@ -1,0 +1,28 @@
+﻿<Application
+    x:Class="UrlToolkit.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UrlToolkit"
+    xmlns:common="using:UrlToolkit.Common">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- General -->
+            <common:ViewModelLocator x:Key="viewModelLocator" />
+
+            <ResourceDictionary.ThemeDictionaries>
+                <!-- Default Theme -->
+                <ResourceDictionary x:Key="Default" Source="/ResourceDictionaries/Themes/Default.xaml" />
+            </ResourceDictionary.ThemeDictionaries>
+
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Converters -->
+                <ResourceDictionary Source="/ResourceDictionaries/Converters.xaml" />
+
+                <!-- Data Templates-->
+                <ResourceDictionary Source="/ResourceDictionaries/DataTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>

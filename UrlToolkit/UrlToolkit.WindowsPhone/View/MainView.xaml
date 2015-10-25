@@ -1,0 +1,145 @@
+﻿<Page
+    x:Class="UrlToolkit.View.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UrlToolkit.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:uc="using:UrlToolkit.UserControls"
+    xmlns:common="using:UrlToolkit.Common"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!-- The datacontext for the window -->
+    <Page.DataContext>
+        <Binding Mode="OneWay" Source="{StaticResource viewModelLocator}"  Path="Main" d:IsDataSource="True" />
+    </Page.DataContext>
+
+    <Grid x:Name="LayoutRoot">
+
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title Panel -->
+        <uc:PageHeader Grid.Row="0" />
+
+        <Grid Grid.Row="1" x:Name="ContentRoot" Margin="19,9.5,19,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="ComboBoxSearchType" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                      ItemsSource="{Binding MatchTypes}" DisplayMemberPath="Value" 
+                      SelectedItem="{Binding MatchType, Mode=TwoWay}">
+            </ComboBox>
+
+            <TextBox Name="FilterTextBox" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" Margin="0" Text="{Binding Path=SearchString,Mode=TwoWay}"/>
+
+            <Button x:Uid="ButtonWordSearch" Grid.Row="1" Grid.Column="1" FontFamily="Segoe UI Symbol" FontWeight="Bold"
+                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="58"
+                    Command="{Binding ListWordsCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,0">
+                <ProgressRing Name="QuestionListProgressBar" IsEnabled="True" IsActive="True"
+                          Foreground="{StaticResource PhoneForegroundBrush}" Background="{StaticResource PhoneBackgroundBrush}"
+                          Visibility="{Binding IsResultsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Height="10" Width="10"  />
+                <TextBlock x:Uid="TextBlockNoWordFound" Name="TextBlockNoWordFound"                       
+                           TextWrapping="WrapWholeWords" Style="{StaticResource TextBlockStyle}"
+                           Visibility="{Binding IsNoResultFound, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+
+            <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                          Grid.Row="2" Grid.ColumnSpan="2"
+                          Visibility="{Binding IsSuggestion, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                <ItemsControl Name="WordDescriptionsListView"
+                              ItemsSource="{Binding Path=Words}"
+                              AutomationProperties.AutomationId="WordDescriptionsListView"
+                              AutomationProperties.Name="WordDescriptions">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,9.5" >
+                                <TextBlock Style="{StaticResource TextBlockSubtitleStyle}">
+                                    <Run Text="{Binding Name}" FontSize="22" Foreground="{StaticResource PhoneForegroundBrush}" FontWeight="Bold"/>
+                                    <Run Text="{Binding Origin}" />
+                                </TextBlock>
+                                <RichTextBlock TextWrapping="WrapWholeWords" Style="{StaticResource RichTextBlockStyle}"
+                                               IsTextSelectionEnabled="False" common:RichTextBlockHelper.Html="{Binding Description}"
+                                               Visibility="{Binding Description.Length, Converter={StaticResource ContentLengthToVisibilityConverter}}"/>
+                                <TextBlock Style="{StaticResource TextBlockStyle}" Margin="0,2.5,0,0" >
+                                    <Run Text="{Binding DictionaryName}" FontWeight="Bold"/>
+                                    <Run Text="{Binding Year}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" 
+                          Grid.Row="2" Grid.ColumnSpan="2"
+                          Visibility="{Binding IsSuggestion, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" x:Uid="TextBlockSuggestionsFound" Name="TextBlockSuggestionsFound"                       
+                               TextWrapping="WrapWholeWords" Style="{StaticResource SuggestionTextBlockStyle}"
+                               Visibility="{Binding IsPartialMatch, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+                    <GridView Name="SuggestionsGridView"
+                              Grid.Row="1"
+                              Margin="0,9.5,0,0"
+                              ItemsSource="{Binding Path=Words}"
+                              AutomationProperties.AutomationId="SuggestionsGridView"
+                              AutomationProperties.Name="Suggestions"
+                              SelectionMode="None"
+                              IsItemClickEnabled="True">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Margin="0,0,19,9.5" Style="{StaticResource SuggestionTextBlockStyle}" >
+                                    <Underline>
+                                        <Run Text="{Binding Name}" />
+                                    </Underline>
+                                </TextBlock>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+
+                        <i:Interaction.Behaviors>
+                            <core:EventTriggerBehavior EventName="ItemClick">
+                                <core:InvokeCommandAction Command="{Binding ReadWordCommand}" 
+                                                          CommandParameter="{Binding Path=SelectedItem, ElementName=SuggestionsGridView}"/>
+                            </core:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </GridView>
+                </Grid>
+            </ScrollViewer>-->
+        </Grid>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="AppBarButtonNavigateToAbout" Command="{Binding NavigateToAboutCommand}" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
