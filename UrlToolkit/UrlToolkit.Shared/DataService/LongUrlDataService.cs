@@ -70,14 +70,18 @@ namespace UrlToolkit.DataService
             }
         }
 
-        public async Task<LongUrl> ExpandUrl(LongUrlFilter filter)
+        public async Task<LongUrl> ExpandUrl(LongUrlFilter filter, Action onLoadingStarts, Action onLoadingEnds)
         {
+            onLoadingStarts();
+
             String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand?format=json&url=" + Uri.EscapeUriString(filter.shortenedUrl);
             String responseBody = await GetResponse(expanderUri);
 
             using (StreamReader reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(responseBody))))
             {
                 String jsonString = reader.ReadToEnd();
+
+                onLoadingEnds();
                 return LongUrl.mapItemToLongUrl(JObject.Parse(jsonString));
             }
         }

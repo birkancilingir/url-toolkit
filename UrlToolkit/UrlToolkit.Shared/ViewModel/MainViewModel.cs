@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net;
 using UrlToolkit.Common;
 using UrlToolkit.DataService;
+using UrlToolkit.DataService.Entities;
 using UrlToolkit.View;
 using Windows.ApplicationModel.Resources;
+using Windows.Networking.Connectivity;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -17,47 +20,17 @@ namespace UrlToolkit.ViewModel
         public MainViewModel(ILongUrlDataService dataService)
         {
             _dataService = dataService;
-            ResourceLoader resourceLoader = new ResourceLoader();
-
-            MatchTypes = new ObservableCollection<MatchTypeItem>
-            {
-                new MatchTypeItem {Key = "FullMatch", Value = resourceLoader.GetString("ComboBoxItemFullMatch") },
-                new MatchTypeItem {Key = "PartialMatch", Value = resourceLoader.GetString("ComboBoxItemPartialMatch") }
-            };
-
-            MatchType = MatchTypes[0];
-
-            //Words = new ObservableCollection<Word>();
-        }
-
-        public class MatchTypeItem
-        {
-            public String Key { get; set; }
-            public String Value { get; set; }
         }
 
         #region Data Members
-        public ObservableCollection<MatchTypeItem> MatchTypes { get; private set; }
+        private String _shortenedUrlString;
 
-        private MatchTypeItem _matchType;
-
-        public MatchTypeItem MatchType
+        public String ShortenedUrlString
         {
-            get { return this._matchType; }
+            get { return this._shortenedUrlString; }
             set
             {
-                SetProperty(ref this._matchType, value);
-            }
-        }
-
-        private String _searchString;
-
-        public String SearchString
-        {
-            get { return this._searchString; }
-            set
-            {
-                SetProperty(ref this._searchString, value);
+                SetProperty(ref this._shortenedUrlString, value);
             }
         }
 
@@ -72,94 +45,71 @@ namespace UrlToolkit.ViewModel
             }
         }
 
-        private Boolean _isNoResultFound = false;
+        private ObservableCollection<String> _recentUrls;
 
-        public Boolean IsNoResultFound
+        public ObservableCollection<String> RecentUrls
         {
-            get { return this._isNoResultFound; }
+            get { return this._recentUrls; }
             set
             {
-                SetProperty(ref this._isNoResultFound, value);
+                SetProperty(ref this._recentUrls, value);
             }
         }
-
-        private Boolean _isSuggesstion = false;
-
-        public Boolean IsSuggestion
-        {
-            get { return this._isSuggesstion; }
-            set
-            {
-                SetProperty(ref this._isSuggesstion, value);
-            }
-        }
-
-        private Boolean _isPartialMatch = false;
-
-        public Boolean IsPartialMatch
-        {
-            get { return this._isPartialMatch; }
-            set
-            {
-                SetProperty(ref this._isPartialMatch, value);
-            }
-        }
-
-        //private ObservableCollection<Word> _words;
-
-        //public ObservableCollection<Word> Words
-        //{
-        //    get { return this._words; }
-        //    set
-        //    {
-        //        SetProperty(ref this._words, value);
-        //    }
-        //}
         #endregion
 
         #region Commands
-        //private RelayCommand _listWordsCommand;
+        private RelayCommand _expandUrlCommand;
 
-        //public RelayCommand ListWordsCommand
-        //{
-        //    get
-        //    {
-        //        return _listWordsCommand
-        //            ?? (_listWordsCommand = new RelayCommand(() =>
-        //            {
-        //                Debug.WriteLine("ListWordsCommand");
-        //                ListWords(null, SearchString);
-        //            })
-        //            );
-        //    }
-        //}
+        public RelayCommand ExpandUrlCommand
+        {
+            get
+            {
+                return _expandUrlCommand
+                    ?? (_expandUrlCommand = new RelayCommand(async () =>
+                    {
+                        Debug.WriteLine("ExpandUrlCommand");
 
-        //private RelayCommand<object> _readWordCommand;
+                        if (String.IsNullOrWhiteSpace(ShortenedUrlString))
+                            return;
 
-        //public RelayCommand<object> ReadWordCommand
-        //{
-        //    get
-        //    {
-        //        return _readWordCommand
-        //            ?? (_readWordCommand = new RelayCommand<object>((parameter) =>
-        //            {
-        //                Debug.WriteLine("ReadWordCommand");
+                        ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
+                        if (internetConnectionProfile == null || internetConnectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
+                        {
+                            ResourceLoader resourceLoader = new ResourceLoader();
+                            await AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("InternetNotAvailableErrorMessage"));
+                            return;
+                        }
 
-        //                Word word = (parameter as Windows.UI.Xaml.Controls.ItemClickEventArgs).ClickedItem as Word;
+                        LongUrlFilter filter = new LongUrlFilter();
+                        filter.shortenedUrl = ShortenedUrlString;
 
-        //                if (word == null)
-        //                    return;
+                        try
+                        {
+                            LongUrl result = await _dataService.ExpandUrl(filter,
+                                () => { IsResultsLoading = true; },
+                                () => { IsResultsLoading = false; }
+                            );
+                        }
+                        catch (Exception e)
+                        {
+                            if (e.Message == HttpStatusCode.InternalServerError.ToString())
+                            {
+                                IsResultsLoading = false;
 
-        //                SearchString = word.Name;
-        //                MatchType = MatchTypes[0];
+                                ResourceLoader resourceLoader = new ResourceLoader();
+                                AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("ServerErrorMessage"));
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
 
-        //                ListWords(word.Id, word.Name);
-        //            })
-        //            );
-        //    }
-        //}
 
-#if WINDOWS_PHONE_APP
+                    })
+                    );
+            }
+        }
         private RelayCommand _navigateToAboutCommand;
 
         public RelayCommand NavigateToAboutCommand
@@ -177,70 +127,6 @@ namespace UrlToolkit.ViewModel
                     );
             }
         }
-#endif
         #endregion
-
-        //private async void ListWords(Nullable<int> id, String name)
-        //{
-        //    if (String.IsNullOrWhiteSpace(name) || MatchType == null)
-        //        return;
-
-        //    ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
-        //    if (internetConnectionProfile == null || internetConnectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
-        //    {
-        //        ResourceLoader resourceLoader = new ResourceLoader();
-        //        await AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("InternetNotAvailableErrorMessage"));
-        //        return;
-        //    }
-
-        //    if (Words != null)
-        //        Words.Clear();
-        //    IsNoResultFound = false;
-        //    IsSuggestion = false;
-
-        //    BigTurkishDictionaryFilter filter = new BigTurkishDictionaryFilter();
-        //    filter.SearchString = name;
-        //    filter.SearchId = id;
-
-        //    if (MatchType.Key.Equals("FullMatch"))
-        //    {
-        //        filter.MatchType = BigTurkishDictionaryFilter.MatchTypeFilter.FULL_MATCH;
-        //        IsPartialMatch = false;
-        //    }
-        //    else
-        //    {
-        //        filter.MatchType = BigTurkishDictionaryFilter.MatchTypeFilter.PARTIAL_MATCH;
-        //        IsPartialMatch = true;
-        //    }
-
-        //    try
-        //    {
-        //        SearchResult result = await _dataService.SearchBigTurkishDictionary(filter,
-        //            () => { IsResultsLoading = true; },
-        //            () => { IsResultsLoading = false; }
-        //        );
-
-        //        IsSuggestion = result.IsSuggestion;
-
-        //        Words = new ObservableCollection<Word>(result.Words);
-        //        if (Words.Count == 0)
-        //            IsNoResultFound = true;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        if (e.Message == HttpStatusCode.InternalServerError.ToString())
-        //        {
-        //            IsNoResultFound = false;
-        //            IsResultsLoading = false;
-
-        //            ResourceLoader resourceLoader = new ResourceLoader();
-        //            AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("ServerErrorMessage"));
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
     }
 }
