@@ -6,7 +6,5 @@
     x:Name="Converters">
 
     <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-    <converter:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
-    <converter:ContentLengthToVisibilityConverter x:Key="ContentLengthToVisibilityConverter" />
 
 </ResourceDictionary>

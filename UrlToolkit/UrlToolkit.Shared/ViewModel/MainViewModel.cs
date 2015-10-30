@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using UrlToolkit.Common;
 using UrlToolkit.DataService;
@@ -44,17 +45,6 @@ namespace UrlToolkit.ViewModel
                 SetProperty(ref this._isResultsLoading, value);
             }
         }
-
-        private ObservableCollection<String> _recentUrls;
-
-        public ObservableCollection<String> RecentUrls
-        {
-            get { return this._recentUrls; }
-            set
-            {
-                SetProperty(ref this._recentUrls, value);
-            }
-        }
         #endregion
 
         #region Commands
@@ -80,8 +70,9 @@ namespace UrlToolkit.ViewModel
                             return;
                         }
 
-                        LongUrlFilter filter = new LongUrlFilter();
-                        filter.shortenedUrl = ShortenedUrlString;
+                        ExpandUrlFilter filter = new ExpandUrlFilter();
+                        filter.Url = ShortenedUrlString;
+                        filter.Format = ResponseFormat.JSON;
 
                         try
                         {

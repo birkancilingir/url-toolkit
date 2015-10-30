@@ -48,30 +48,7 @@
 
             <Button x:Uid="ButtonExpand" Grid.Row="0" Grid.Column="1" FontFamily="Segoe UI Symbol" FontWeight="Bold"
                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="58"
-                    Command="{Binding ExpandUrlCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />
-
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
-                          Grid.Row="1" Grid.ColumnSpan="2">
-                <ItemsControl Name="RecentUrlsListView"
-                              ItemsSource="{Binding Path=RecentUrls}"
-                              AutomationProperties.AutomationId="RecentUrlsListView"
-                              AutomationProperties.Name="RecentUrls">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Margin="0,0,0,9.5" >
-                                <TextBlock Style="{StaticResource TextBlockSubtitleStyle}">
-                                    <Run Text="{Binding Name}" FontSize="22" Foreground="{StaticResource PhoneForegroundBrush}" FontWeight="Bold"/>
-                                    <Run Text="{Binding Origin}" />
-                                </TextBlock>
-                                <TextBlock Style="{StaticResource TextBlockStyle}" Margin="0,2.5,0,0" >
-                                    <Run Text="{Binding DictionaryName}" FontWeight="Bold"/>
-                                    <Run Text="{Binding Year}" />
-                                </TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>            
+                    Command="{Binding ExpandUrlCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />      
         </Grid>
     </Grid>
 

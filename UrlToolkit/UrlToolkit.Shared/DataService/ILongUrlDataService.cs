@@ -7,8 +7,8 @@ namespace UrlToolkit.DataService
 {
     public interface ILongUrlDataService
     {
-        Task<LongUrl> ExpandUrl(LongUrlFilter filter, Action onLoadingStarts, Action onLoadingEnds);
+        Task<LongUrl> ExpandUrl(ExpandUrlFilter filter, Action onLoadingStarts, Action onLoadingEnds);
 
-        Task<IList<Service>> GetSupportedServicesList(BaseFilter filter);
+        Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter);
     }
 }

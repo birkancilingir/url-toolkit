@@ -48,7 +48,7 @@ namespace UrlToolkit.DataService
             }
         }
 
-        public async Task<IList<Service>> GetSupportedServicesList(BaseFilter filter)
+        public async Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter)
         {
             string servicesUri = LongUrlConstants.API_ENDPOINT + "/services?format=json";
 
@@ -70,11 +70,11 @@ namespace UrlToolkit.DataService
             }
         }
 
-        public async Task<LongUrl> ExpandUrl(LongUrlFilter filter, Action onLoadingStarts, Action onLoadingEnds)
+        public async Task<LongUrl> ExpandUrl(ExpandUrlFilter filter, Action onLoadingStarts, Action onLoadingEnds)
         {
             onLoadingStarts();
 
-            String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand?format=json&url=" + Uri.EscapeUriString(filter.shortenedUrl);
+            String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand?format=json&url=" + Uri.EscapeUriString(filter.Url);
             String responseBody = await GetResponse(expanderUri);
 
             using (StreamReader reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(responseBody))))
