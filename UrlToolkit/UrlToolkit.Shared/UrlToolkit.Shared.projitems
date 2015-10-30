@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\AlertService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\BindableBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Converters\ContentLengthToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ExceptionHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ProjectConstants.cs" />

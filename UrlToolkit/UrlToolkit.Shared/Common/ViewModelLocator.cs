@@ -1,4 +1,6 @@
 ﻿using Ninject;
+using System;
+using System.Diagnostics;
 using UrlToolkit.DataService;
 using UrlToolkit.ViewModel;
 
