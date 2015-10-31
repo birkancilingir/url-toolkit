@@ -13,12 +13,16 @@ namespace UrlToolkit.DataService
 {
     public class LongUrlDataService : ILongUrlDataService
     {
-        private static async Task<string> GetResponse(string requestUri)
+        private static async Task<string> GetResponse(String requestUri, String userAgent)
         {
             try
             {
                 using (HttpClient client = new HttpClient())
                 {
+                    if (!String.IsNullOrWhiteSpace(userAgent))
+                        client.DefaultRequestHeaders.Add("User-Agent", userAgent);  
+
+
                     HttpResponseMessage response = await client.GetAsync(new Uri(requestUri));
                     if (!response.IsSuccessStatusCode)
                     {
@@ -48,11 +52,11 @@ namespace UrlToolkit.DataService
             }
         }
 
-        public async Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter)
+        public async Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter, String userAgent)
         {
             string servicesUri = LongUrlConstants.API_ENDPOINT + "/services?format=json";
 
-            string responseBody = await GetResponse(servicesUri);
+            string responseBody = await GetResponse(servicesUri, userAgent);
 
             using (StreamReader reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(responseBody))))
             {
@@ -70,12 +74,12 @@ namespace UrlToolkit.DataService
             }
         }
 
-        public async Task<LongUrl> ExpandUrl(ExpandUrlFilter filter, Action onLoadingStarts, Action onLoadingEnds)
+        public async Task<LongUrl> ExpandUrl(ExpandUrlFilter filter, String userAgent, Action onLoadingStarts, Action onLoadingEnds)
         {
             onLoadingStarts();
 
             String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand?format=json&url=" + Uri.EscapeUriString(filter.Url);
-            String responseBody = await GetResponse(expanderUri);
+            String responseBody = await GetResponse(expanderUri, userAgent);
 
             using (StreamReader reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(responseBody))))
             {
