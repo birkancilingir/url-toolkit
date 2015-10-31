@@ -76,7 +76,7 @@ namespace UrlToolkit.ViewModel
 
                         try
                         {
-                            LongUrl result = await _dataService.ExpandUrl(filter,
+                            LongUrl result = await _dataService.ExpandUrl(filter, ProjectUtilFunctions.getUserAgent(),
                                 () => { IsResultsLoading = true; },
                                 () => { IsResultsLoading = false; }
                             );
