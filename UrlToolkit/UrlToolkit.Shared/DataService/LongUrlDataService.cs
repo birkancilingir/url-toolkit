@@ -19,8 +19,10 @@ namespace UrlToolkit.DataService
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    if (!String.IsNullOrWhiteSpace(userAgent))
-                        client.DefaultRequestHeaders.Add("User-Agent", userAgent);  
+                    if (String.IsNullOrWhiteSpace(userAgent))
+                        throw new Exception("User-Agent is required");
+                    
+                    client.DefaultRequestHeaders.Add("User-Agent", userAgent);  
 
 
                     HttpResponseMessage response = await client.GetAsync(new Uri(requestUri));
@@ -54,7 +56,23 @@ namespace UrlToolkit.DataService
 
         public async Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter, String userAgent)
         {
-            string servicesUri = LongUrlConstants.API_ENDPOINT + "/services?format=json";
+            string servicesUri = LongUrlConstants.API_ENDPOINT + "/services";
+
+            switch (filter.Format)
+            {
+                case ResponseFormat.XML:
+                    servicesUri = servicesUri + "?format=xml";
+                    break;
+                case ResponseFormat.JSON:
+                    servicesUri = servicesUri + "?format=json";
+                    break;
+                case ResponseFormat.PHP:
+                    servicesUri = servicesUri + "?format=php";
+                    break;
+                default:
+                    servicesUri = servicesUri + "?format=json";
+                    break;
+            }
 
             string responseBody = await GetResponse(servicesUri, userAgent);
 
@@ -78,7 +96,47 @@ namespace UrlToolkit.DataService
         {
             onLoadingStarts();
 
-            String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand?format=json&url=" + Uri.EscapeUriString(filter.Url);
+            if (!filter.Url.ToLowerInvariant().StartsWith("http://") && !filter.Url.ToLowerInvariant().StartsWith("https://"))
+                throw new Exception("URL must start with http:// or https://.");
+
+            String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand";
+            
+            switch (filter.Format)
+            {
+                case ResponseFormat.XML:
+                    expanderUri = expanderUri + "?format=xml";
+                    break;
+                case ResponseFormat.JSON:
+                    expanderUri = expanderUri + "?format=json";
+                    break;
+                case ResponseFormat.PHP:
+                    expanderUri = expanderUri + "?format=php";
+                    break;
+                default:
+                    expanderUri = expanderUri + "?format=json";
+                    break;
+            }
+
+            if (filter.AllRedirects == Argument.INCLUDE)
+                expanderUri = expanderUri + "&all-redirects=1";
+
+            if (filter.CanonicalUrl == Argument.INCLUDE)
+                expanderUri = expanderUri + "&rel-canonical=1";
+
+            if (filter.ContentType == Argument.INCLUDE)
+                expanderUri = expanderUri + "&content-type=1";
+
+            if (filter.HtmlTitle == Argument.INCLUDE)
+                expanderUri = expanderUri + "&title=1";
+
+            if (filter.MetaDescription == Argument.INCLUDE)
+                expanderUri = expanderUri + "&meta-description=1";
+
+            if (filter.MetaKeywords == Argument.INCLUDE)
+                expanderUri = expanderUri + "&meta-keywords=1";
+
+            expanderUri = expanderUri + "&url=" + Uri.EscapeUriString(filter.Url);
+
             String responseBody = await GetResponse(expanderUri, userAgent);
 
             using (StreamReader reader = new StreamReader(new MemoryStream(Encoding.UTF8.GetBytes(responseBody))))
