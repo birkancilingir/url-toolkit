@@ -40,8 +40,6 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Margin="0,0,0,10">
@@ -57,23 +55,11 @@
 
                     <TextBlock x:Uid="TextBlockTitleVersionHistory" Grid.Row="3" Style="{StaticResource TextBlockTitleStyle}" />
                     <StackPanel Grid.Row="4" Margin="0,0,0,10">
-                        <TextBlock x:Uid="TextBlockVersion1_3_0_0"  Style="{StaticResource TextBlockSubtitleStyle}" FontWeight="Bold" />
-                        <TextBlock x:Uid="TextBlockVersion1_3_0_0_1" Style="{StaticResource TextBlockStyle}" />
-                        <TextBlock x:Uid="TextBlockVersion1_3_0_0_2" Style="{StaticResource TextBlockStyle}" />
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="5" Margin="0,0,0,10">
-                        <TextBlock x:Uid="TextBlockVersion1_2_0_0"  Style="{StaticResource TextBlockSubtitleStyle}" FontWeight="Bold" />
-                        <TextBlock x:Uid="TextBlockVersion1_2_0_0_1" Style="{StaticResource TextBlockStyle}" />
-                        <TextBlock x:Uid="TextBlockVersion1_2_0_0_2" Style="{StaticResource TextBlockStyle}" />
-                    </StackPanel>
-
-                    <StackPanel Grid.Row="6" Margin="0,0,0,10">
                         <TextBlock x:Uid="TextBlockVersion1_1_0_0"  Style="{StaticResource TextBlockSubtitleStyle}" FontWeight="Bold" />
                         <TextBlock x:Uid="TextBlockVersion1_1_0_0_1" Style="{StaticResource TextBlockStyle}" />
                     </StackPanel>
 
-                    <StackPanel Grid.Row="7" Margin="0,0,0,10">
+                    <StackPanel Grid.Row="5" Margin="0,0,0,10">
                         <TextBlock x:Uid="TextBlockInformation" Style="{StaticResource TextBlockImportantItemStyle}" 
                                    TextWrapping="WrapWholeWords" />
                     </StackPanel>
