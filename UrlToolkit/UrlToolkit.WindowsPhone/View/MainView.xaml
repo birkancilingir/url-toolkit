@@ -46,7 +46,7 @@
 
             <TextBox Name="ShortenedUrlTextBox" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" Margin="0" Text="{Binding Path=ShortenedUrlString,Mode=TwoWay}"/>
 
-            <Button x:Uid="ButtonExpand" Grid.Row="0" Grid.Column="1" FontFamily="Segoe UI Symbol" FontWeight="Bold"
+            <Button x:Uid="ButtonExpand" Grid.Row="0" Grid.Column="1" FontWeight="Bold"
                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="58"
                     Command="{Binding ExpandUrlCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />      
         </Grid>

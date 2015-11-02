@@ -118,102 +118,72 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppBarButtonNavigateToAbout.Label" xml:space="preserve">
-    <value>Hakkında</value>
+    <value>About</value>
   </data>
   <data name="AppBarButtonFeedback.Label" xml:space="preserve">
-    <value>Geri Bildirim</value>
+    <value>Feedback</value>
   </data>
   <data name="AppBarButtonNote.Label" xml:space="preserve">
-    <value>Not ve Yorum</value>
+    <value>Review</value>
   </data>
   <data name="ButtonWordSearch.Content" xml:space="preserve">
-    <value> Ara</value>
-  </data>
-  <data name="ComboBoxItemFullMatch" xml:space="preserve">
-    <value>Tam sözcük</value>
-  </data>
-  <data name="ComboBoxItemPartialMatch" xml:space="preserve">
-    <value>1. ve/veya 2. kelimesi ... başlayan</value>
+    <value>Expand</value>
   </data>
   <data name="PageHeaderAboutView.PageTitle" xml:space="preserve">
-    <value>HAKKINDA</value>
+    <value>ABOUT</value>
   </data>
   <data name="TextBlockDeveloperName.Text" xml:space="preserve">
     <value>Birkan Çilingir</value>
   </data>
   <data name="TextBlockInformation.Text" xml:space="preserve">
-    <value>TDK Sözlük uygulaması Türk Dil Kurumu resmi sitesinde bulunan Büyük Türkçe Sözlük verilerini kullanmaktadır. Uygulama Türk Dil Kurumu'nun resmi uygulaması değildir.</value>
+    <value>URLToolkit uses longurl.org API in order to expand shortened URLs.</value>
   </data>
   <data name="TextBlockLibraries1.Text" xml:space="preserve">
     <value>Ninject Portable</value>
   </data>
   <data name="TextBlockLibraries2.Text" xml:space="preserve">
-    <value>HtmlAgilityPack</value>
+    <value>JSON.Net</value>
   </data>
   <data name="TextBlockPageHeader.Text" xml:space="preserve">
-    <value>Büyük Türkçe Sözlük</value>
+    <value>URLToolkit</value>
   </data>
   <data name="TextBlockTitleDeveloper.Text" xml:space="preserve">
-    <value>Geliştiren</value>
+    <value>Developed By</value>
   </data>
   <data name="TextBlockTitleLibraries.Text" xml:space="preserve">
-    <value>Kullanılan Kütüphaneler</value>
+    <value>Libraries</value>
   </data>
   <data name="TextBlockTitleVersionHistory.Text" xml:space="preserve">
-    <value>Sürüm Tarihçesi</value>
+    <value>Release History</value>
   </data>
   <data name="TextBlockVersion1_1_0_0.Text" xml:space="preserve">
     <value>v1.1.0.0</value>
   </data>
   <data name="TextBlockVersion1_1_0_0_1.Text" xml:space="preserve">
-    <value>- İlk yazım</value>
+    <value>- Initial Release</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
-    <value>TDK Sözlük</value>
+    <value>URL Toolkit</value>
   </data>
   <data name="ErrorNo" xml:space="preserve">
-    <value>Hayır</value>
+    <value>No</value>
   </data>
   <data name="ErrorHeader" xml:space="preserve">
-    <value>TDK Sözlük Hata</value>
+    <value>URL Toolkit Error</value>
   </data>
   <data name="ErrorYes" xml:space="preserve">
-    <value>Evet</value>
+    <value>Yes</value>
   </data>
   <data name="ErrorWarning" xml:space="preserve">
-    <value>Uygulama son çalışmasında hatalı bir şekilde sonlandı. Bu hatayı yazılımcıya bildirmek ister misiniz?</value>
-  </data>
-  <data name="TextBlockNoWordFound.Text" xml:space="preserve">
-    <value>Aradığınız kelime bulunamadı.</value>
-  </data>
-  <data name="TextBlockSuggestionsFound.Text" xml:space="preserve">
-    <value>Aradığınız kelime bulunamadı. Aşağıdaki kelimelerden birini mi aradınız?</value>
+    <value>A problem occurred the last time you ran URL Toolkit. Would you like to send an email to report it?</value>
   </data>
   <data name="AppBarButtonShare.Label" xml:space="preserve">
-    <value>Paylaş</value>
+    <value>Share</value>
   </data>
   <data name="ServerErrorMessage" xml:space="preserve">
-    <value>TDK'nın sistemine erişim esnasında sıkıntı yaşanmaktadır.</value>
+    <value>An error occured while accessing longurl.org servers.</value>
   </data>
   <data name="InternetNotAvailableErrorMessage" xml:space="preserve">
-    <value>Arama yapabilmek için internet bağlantınızın olması gerekmektedir.</value>
-  </data>
-  <data name="TextBlockVersion1_2_0_0.Text" xml:space="preserve">
-    <value>v1.2.0.0</value>
-  </data>
-  <data name="TextBlockVersion1_2_0_0_1.Text" xml:space="preserve">
-    <value>- Görsel düzenlemeler</value>
-  </data>
-  <data name="TextBlockVersion1_2_0_0_2.Text" xml:space="preserve">
-    <value>- Genel hataların giderilmesi</value>
-  </data>
-  <data name="TextBlockVersion1_3_0_0.Text" xml:space="preserve">
-    <value>v1.3.0.0</value>
-  </data>
-  <data name="TextBlockVersion1_3_0_0_1.Text" xml:space="preserve">
-    <value>- Uygulama arka plana geçerken oluşan hata giderildi</value>
-  </data>
-  <data name="TextBlockVersion1_3_0_0_2.Text" xml:space="preserve">
-    <value>- Paylaşım linki düzeltildi</value>
+    <value>In order to expand URLs, Internet connection is required.</value>
   </data>
 </root>

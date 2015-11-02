@@ -41,7 +41,6 @@ namespace UrlToolkit.Common
 
             kernel.Bind<MainViewModel>().ToSelf();
             kernel.Bind<AboutViewModel>().ToSelf();
-
         }
 
         public static ILongUrlDataService DataService
