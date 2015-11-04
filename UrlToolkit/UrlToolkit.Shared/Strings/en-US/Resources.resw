@@ -126,7 +126,7 @@
   <data name="AppBarButtonNote.Label" xml:space="preserve">
     <value>Review</value>
   </data>
-  <data name="ButtonWordSearch.Content" xml:space="preserve">
+  <data name="ButtonExpand.Content" xml:space="preserve">
     <value>Expand</value>
   </data>
   <data name="PageHeaderAboutView.PageTitle" xml:space="preserve">
@@ -156,10 +156,10 @@
   <data name="TextBlockTitleVersionHistory.Text" xml:space="preserve">
     <value>Release History</value>
   </data>
-  <data name="TextBlockVersion1_1_0_0.Text" xml:space="preserve">
-    <value>v1.1.0.0</value>
+  <data name="TextBlockVersion1_0_0_0.Text" xml:space="preserve">
+    <value>v1.0.0.0</value>
   </data>
-  <data name="TextBlockVersion1_1_0_0_1.Text" xml:space="preserve">
+  <data name="TextBlockVersion1_0_0_0_1.Text" xml:space="preserve">
     <value>- Initial Release</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">

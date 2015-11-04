@@ -96,7 +96,9 @@ namespace UrlToolkit.DataService
         {
             onLoadingStarts();
 
-            if (!filter.Url.ToLowerInvariant().StartsWith("http://") && !filter.Url.ToLowerInvariant().StartsWith("https://"))
+            filter.Url = filter.Url.ToLowerInvariant();
+
+            if (!filter.Url.StartsWith("http://") && !filter.Url.StartsWith("https://"))
                 throw new Exception("URL must start with http:// or https://.");
 
             String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand";
@@ -134,6 +136,9 @@ namespace UrlToolkit.DataService
 
             if (filter.MetaKeywords == Argument.INCLUDE)
                 expanderUri = expanderUri + "&meta-keywords=1";
+
+            if (filter.ResponseCode == Argument.INCLUDE)
+                expanderUri = expanderUri + "&response-code=1";
 
             expanderUri = expanderUri + "&url=" + Uri.EscapeUriString(filter.Url);
 
