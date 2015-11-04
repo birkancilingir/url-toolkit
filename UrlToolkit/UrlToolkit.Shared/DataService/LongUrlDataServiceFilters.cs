@@ -22,5 +22,5 @@ namespace UrlToolkit.DataService
     }
 
     public enum ResponseFormat { XML, JSON, PHP }
-    public enum Argument { INCLUDE, EXCLUDE }
+    public enum Argument { EXCLUDE, INCLUDE }
 }

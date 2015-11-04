@@ -14,7 +14,7 @@
 
     <!-- The datacontext for the window -->
     <Page.DataContext>
-        <Binding Mode="OneWay" Source="{StaticResource viewModelLocator}"  Path="Main" d:IsDataSource="True" />
+        <Binding Mode="OneWay" Source="{StaticResource viewModelLocator}" Path="Main" d:IsDataSource="True" />
     </Page.DataContext>
 
     <Grid x:Name="LayoutRoot">
