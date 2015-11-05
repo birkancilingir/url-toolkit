@@ -113,12 +113,27 @@ namespace UrlToolkit.ViewModel
                                 throw;
                             }
                         }
-
-
                     })
                     );
             }
         }
+
+        private RelayCommand _openUrlCommand;
+
+        public RelayCommand OpenUrlCommand
+        {
+            get
+            {
+                return _openUrlCommand
+                    ?? (_openUrlCommand = new RelayCommand(async () =>
+                    {
+                        Debug.WriteLine("OpenUrlCommand:" + Result.Url);
+                        await Windows.System.Launcher.LaunchUriAsync(new Uri(Result.Url));
+                    })
+                    );
+            }
+        }
+
         private RelayCommand _navigateToAboutCommand;
 
         public RelayCommand NavigateToAboutCommand

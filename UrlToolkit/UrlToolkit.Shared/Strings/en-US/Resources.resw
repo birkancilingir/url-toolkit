@@ -186,4 +186,7 @@
   <data name="InternetNotAvailableErrorMessage" xml:space="preserve">
     <value>In order to expand URLs, Internet connection is required.</value>
   </data>
+  <data name="AppBarButtonOpenUrl.Label" xml:space="preserve">
+    <value>Open</value>
+  </data>
 </root>
