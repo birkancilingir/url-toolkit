@@ -71,7 +71,11 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar ClosedDisplayMode="Minimal">
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Uid="AppBarButtonOpenUrl" Icon="Go" Command="{Binding OpenUrlCommand, ConverterParameter={Binding Result.Url}}"
+                              IsEnabled="{Binding Result.Url.Length, Converter={StaticResource ContentLengthToBooleanConverter}, FallbackValue=False}" />
+            </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Uid="AppBarButtonNavigateToAbout" Command="{Binding NavigateToAboutCommand}" />
             </CommandBar.SecondaryCommands>

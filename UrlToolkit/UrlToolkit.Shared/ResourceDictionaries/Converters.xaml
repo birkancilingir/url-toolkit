@@ -8,5 +8,6 @@
     <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <converter:ContentLengthToVisibilityConverter x:Key="ContentLengthToVisibilityConverter" />
     <converter:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" />
+    <converter:ContentLengthToBooleanConverter x:Key="ContentLengthToBooleanConverter" />
 
 </ResourceDictionary>
