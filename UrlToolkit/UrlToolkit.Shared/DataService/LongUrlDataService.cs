@@ -20,7 +20,7 @@ namespace UrlToolkit.DataService
                 using (HttpClient client = new HttpClient())
                 {
                     if (String.IsNullOrWhiteSpace(userAgent))
-                        throw new Exception("User-Agent is required");
+                        throw new LongUrlDataServiceException("User-Agent is required");
                     
                     client.DefaultRequestHeaders.Add("User-Agent", userAgent);  
 
@@ -30,7 +30,7 @@ namespace UrlToolkit.DataService
                     {
                         if (response.StatusCode == HttpStatusCode.InternalServerError)
                         {
-                            throw new Exception(HttpStatusCode.InternalServerError.ToString());
+                            throw new LongUrlDataServiceException(HttpStatusCode.InternalServerError.ToString());
                         }
                         else
                         {
@@ -99,7 +99,7 @@ namespace UrlToolkit.DataService
             filter.Url = filter.Url.ToLowerInvariant();
 
             if (!filter.Url.StartsWith("http://") && !filter.Url.StartsWith("https://"))
-                throw new Exception("URL must start with http:// or https://.");
+                throw new LongUrlDataServiceException("URL must start with http:// or https://.");
 
             String expanderUri = LongUrlConstants.API_ENDPOINT + "/expand";
             

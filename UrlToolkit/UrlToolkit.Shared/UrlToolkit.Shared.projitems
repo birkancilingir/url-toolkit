@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\AlertService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Converters\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Converters\ContentLengthToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ExceptionHandler.cs" />
@@ -32,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataService\ILongUrlDataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataServiceException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataServiceFilters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainViewModel.cs" />

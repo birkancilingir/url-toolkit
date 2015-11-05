@@ -51,7 +51,22 @@
 
             <Button x:Uid="ButtonExpand" Grid.Row="0" Grid.Column="1" FontWeight="Bold"
                     VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="58"
-                    Command="{Binding ExpandUrlCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />      
+                    Command="{Binding ExpandUrlCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />
+
+            <ProgressRing Name="QuestionListProgressBar" 
+                          Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,0"
+                          IsEnabled="True" IsActive="True"
+                          Foreground="{StaticResource PhoneForegroundBrush}" Background="{StaticResource PhoneBackgroundBrush}"
+                          Visibility="{Binding IsResultsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Height="10" Width="10"  />
+
+            <TextBlock Name="ResultUrlTextBlock" Text="{Binding Result.Url}"
+                       Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,0"
+                       Style="{StaticResource TextBlockStyle}"
+                       FontSize="22" TextAlignment="Center"
+                       IsTextSelectionEnabled="True"
+                       Visibility="{Binding IsResultsLoading, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
+
         </Grid>
     </Grid>
 

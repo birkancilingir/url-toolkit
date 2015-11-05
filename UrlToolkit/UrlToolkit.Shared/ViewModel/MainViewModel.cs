@@ -35,6 +35,17 @@ namespace UrlToolkit.ViewModel
             }
         }
 
+        private LongUrl _result;
+
+        public LongUrl Result
+        {
+            get { return this._result; }
+            set
+            {
+                SetProperty(ref this._result, value);
+            }
+        }
+
         private Boolean _isResultsLoading = false;
 
         public Boolean IsResultsLoading
@@ -76,19 +87,26 @@ namespace UrlToolkit.ViewModel
 
                         try
                         {
-                            LongUrl result = await _dataService.ExpandUrl(filter, ProjectUtilFunctions.getUserAgent(),
+                            Result = await _dataService.ExpandUrl(filter, ProjectUtilFunctions.getUserAgent(),
                                 () => { IsResultsLoading = true; },
                                 () => { IsResultsLoading = false; }
                             );
                         }
                         catch (Exception e)
                         {
-                            if (e.Message == HttpStatusCode.InternalServerError.ToString())
+                            if (e is LongUrlDataServiceException)
                             {
+                                ResourceLoader resourceLoader = new ResourceLoader();
                                 IsResultsLoading = false;
 
-                                ResourceLoader resourceLoader = new ResourceLoader();
-                                AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("ServerErrorMessage"));
+                                if (e.Message == HttpStatusCode.InternalServerError.ToString())
+                                {                                    
+                                    AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("ServerErrorMessage"));
+                                }
+                                else
+                                {
+                                    AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), (e as LongUrlDataServiceException).errorMessage);
+                                }
                             }
                             else
                             {
