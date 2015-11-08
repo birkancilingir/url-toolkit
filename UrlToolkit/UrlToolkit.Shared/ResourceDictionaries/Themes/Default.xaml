@@ -40,7 +40,11 @@
         <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilyNormal}" />
     </Style>
 
-    <Style x:Key="TextBlockImportantItemStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
+    <Style x:Key="RichTextBlockImportantStyle" TargetType="RichTextBlock" BasedOn="{StaticResource BaseRichTextBlockStyle}">
+        <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilySemiLight}" />
+        <Setter Property="FontSize" Value="{ThemeResource TextStyleMediumFontSize}" />
+        <Setter Property="TextLineBounds" Value="Full" />
+        <Setter Property="LineHeight" Value="20" />
         <Setter Property="Foreground" Value="Red" />
     </Style>
 

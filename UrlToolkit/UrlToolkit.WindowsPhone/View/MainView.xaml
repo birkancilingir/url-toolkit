@@ -49,9 +49,11 @@
                      Text="{Binding Path=ShortenedUrlString,Mode=TwoWay}"
                      InputScope="Url" />
 
-            <Button x:Uid="ButtonExpand" Grid.Row="0" Grid.Column="1" FontWeight="Bold"
-                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="58"
-                    Command="{Binding ExpandUrlCommand}" Margin="9.667,-9.5,0,2.333" Width="108" />
+            <Button Grid.Row="0" Grid.Column="1"
+                    VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MinHeight="58" MinWidth="50"
+                    Command="{Binding ExpandUrlCommand}" Margin="10.333,-10,-0.333,1.167" Height="58">
+                <Image Source="ms-appx:///Assets/expand-100.png" Width="32" Height="32" Margin="0,0.5,0,0"/>
+            </Button>
 
             <ProgressRing Name="QuestionListProgressBar" 
                           Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,0"
@@ -64,9 +66,7 @@
                        Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,-100,0,0"
                        Style="{StaticResource TextBlockStyle}"
                        FontSize="22" TextAlignment="Center"
-                       IsTextSelectionEnabled="True"
                        Visibility="{Binding IsResultsLoading, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
-
         </Grid>
     </Grid>
 
