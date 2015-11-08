@@ -135,9 +135,6 @@
   <data name="TextBlockDeveloperName.Text" xml:space="preserve">
     <value>Birkan Çilingir</value>
   </data>
-  <data name="TextBlockInformation.Text" xml:space="preserve">
-    <value>URLToolkit uses longurl.org API in order to expand shortened URLs.</value>
-  </data>
   <data name="TextBlockLibraries1.Text" xml:space="preserve">
     <value>Ninject Portable</value>
   </data>
@@ -145,7 +142,7 @@
     <value>JSON.Net</value>
   </data>
   <data name="TextBlockPageHeader.Text" xml:space="preserve">
-    <value>URLToolkit</value>
+    <value>URL Toolkit</value>
   </data>
   <data name="TextBlockTitleDeveloper.Text" xml:space="preserve">
     <value>Developed By</value>
