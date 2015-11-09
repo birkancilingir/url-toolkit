@@ -15,6 +15,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using UrlToolkit.ViewModel;
+using UrlToolkit.DataService.Entities;
+using System.Diagnostics;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -57,36 +60,20 @@ namespace UrlToolkit.View
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            //if (e.PageState != null)
-            //{
-            //    try
-            //    {
-            //        if (e.PageState.ContainsKey("MatchType"))
-            //        {
-            //            TdkDictionary.ViewModel.MainViewModel.MatchTypeItem MatchType = e.PageState["MatchType"] as TdkDictionary.ViewModel.MainViewModel.MatchTypeItem;
-            //            for (int i = 0; i < (this.DataContext as MainViewModel).MatchTypes.Count; i++)
-            //            {
-            //                if ((this.DataContext as MainViewModel).MatchTypes[i].Key == MatchType.Key)
-            //                {
-            //                    (this.DataContext as MainViewModel).MatchType = (this.DataContext as MainViewModel).MatchTypes[i];
-            //                    break;
-            //                }
-            //            }
-            //        }
-
-            //        (this.DataContext as MainViewModel).SearchString = e.PageState["SearchString"] as String;
-            //        (this.DataContext as MainViewModel).IsResultsLoading = ((e.PageState["IsResultsLoading"] as Nullable<Boolean>).HasValue
-            //            && (e.PageState["IsResultsLoading"] as Nullable<Boolean>).Value ? true : false);
-            //        (this.DataContext as MainViewModel).IsNoResultFound = ((e.PageState["IsNoResultFound"] as Nullable<Boolean>).HasValue
-            //            && (e.PageState["IsNoResultFound"] as Nullable<Boolean>).Value ? true : false);
-            //        (this.DataContext as MainViewModel).Words = e.PageState["Words"] as ObservableCollection<Word>;
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Debug.WriteLine(ex.Message);
-            //    }
-
-            //}
+            if (e.PageState != null)
+            {
+                try
+                {
+                    (this.DataContext as MainViewModel).ShortenedUrlString = e.PageState["ShortenedUrlString"] as String;
+                    (this.DataContext as MainViewModel).Result = e.PageState["Result"] as LongUrl;
+                    (this.DataContext as MainViewModel).IsResultsLoading = ((e.PageState["IsResultsLoading"] as Nullable<Boolean>).HasValue
+                        && (e.PageState["IsResultsLoading"] as Nullable<Boolean>).Value ? true : false);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
         }
 
         /// <summary>
@@ -99,11 +86,9 @@ namespace UrlToolkit.View
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            //e.PageState["MatchType"] = (this.DataContext as MainViewModel).MatchType;
-            //e.PageState["SearchString"] = (this.DataContext as MainViewModel).SearchString;
-            //e.PageState["IsResultsLoading"] = (this.DataContext as MainViewModel).IsResultsLoading;
-            //e.PageState["IsNoResultFound"] = (this.DataContext as MainViewModel).IsNoResultFound;
-            //e.PageState["Words"] = (this.DataContext as MainViewModel).Words;
+            e.PageState["Result"] = (this.DataContext as MainViewModel).Result;
+            e.PageState["ShortenedUrlString"] = (this.DataContext as MainViewModel).ShortenedUrlString;
+            e.PageState["IsResultsLoading"] = (this.DataContext as MainViewModel).IsResultsLoading;
         }
 
         #region NavigationHelper registration
