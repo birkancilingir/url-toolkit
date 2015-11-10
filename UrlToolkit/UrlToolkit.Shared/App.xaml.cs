@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using UrlToolkit.Common;
 using UrlToolkit.View;
+using UrlToolkit.DataService.Entities;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -42,9 +43,8 @@ namespace UrlToolkit
             this.Suspending += this.OnSuspending;
             this.UnhandledException += App_UnhandledException;
 
-            //SuspensionManager.KnownTypes.Add(typeof(MainViewModel.MatchTypeItem));
-            //SuspensionManager.KnownTypes.Add(typeof(ObservableCollection<Word>));
-            //SuspensionManager.KnownTypes.Add(typeof(Word));
+            SuspensionManager.KnownTypes.Add(typeof(LongUrl));
+            SuspensionManager.KnownTypes.Add(typeof(Service));
 
             RequestedTheme = ApplicationTheme.Light;
         }

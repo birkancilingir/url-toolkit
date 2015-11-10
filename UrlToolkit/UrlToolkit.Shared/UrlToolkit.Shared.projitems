@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataServiceException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataServiceFilters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataService\LongUrlDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainViewModel.cs" />
   </ItemGroup>

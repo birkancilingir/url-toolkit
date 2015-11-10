@@ -54,8 +54,10 @@ namespace UrlToolkit.DataService
             }
         }
 
-        public async Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter, String userAgent)
+        public async Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter, String userAgent, Action onLoadingStarts, Action onLoadingEnds)
         {
+            onLoadingStarts();
+
             string servicesUri = LongUrlConstants.API_ENDPOINT + "/services";
 
             switch (filter.Format)
@@ -82,11 +84,13 @@ namespace UrlToolkit.DataService
                 JObject parsedString = JObject.Parse(jsonString);
 
                 ObservableCollection<Service> services = new ObservableCollection<Service>();
-                foreach (JObject service in parsedString[0])
+                foreach (JObject service in parsedString.AsJEnumerable())
                 {
                     Service mappedService = Service.mapItemToService(service);
                     services.Add(mappedService);
                 }
+
+                onLoadingEnds();
 
                 return services;
             }

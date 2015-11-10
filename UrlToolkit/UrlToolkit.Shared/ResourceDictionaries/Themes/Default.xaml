@@ -21,14 +21,6 @@
         <Setter Property="Foreground" Value="{ThemeResource PhoneMidBrush}" />
     </Style>
 
-    <Style x:Key="RichTextBlockStyle" TargetType="RichTextBlock" BasedOn="{StaticResource BaseRichTextBlockStyle}">
-        <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilySemiLight}" />
-        <Setter Property="FontSize" Value="{ThemeResource TextStyleMediumFontSize}" />
-        <Setter Property="TextLineBounds" Value="Full" />
-        <Setter Property="LineHeight" Value="20" />
-        <Setter Property="Foreground" Value="{ThemeResource PhoneMidBrush}" />
-    </Style>
-
     <Style x:Key="TextBlockTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
         <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}" />
         <Setter Property="FontFamily" Value="{ThemeResource PhoneFontFamilySemiLight}" />
@@ -48,16 +40,6 @@
         <Setter Property="Foreground" Value="Red" />
     </Style>
 
-    <Style x:Key="SuggestionTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}" />
-    </Style>
-
-    <Style x:Key="SuggestionSubTitleTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockSubtitleStyle}">
-        <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="FontSize" Value="{ThemeResource TextStyleLargeFontSize}" />
-    </Style>
-
     <!-- TextBox -->
     <SolidColorBrush x:Key="TextBoxBackgroundThemeBrush" Color="{ThemeResource PhoneBackgroundColor}" />
     <SolidColorBrush x:Key="TextBoxForegroundThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
@@ -67,15 +49,6 @@
     <!-- Button -->
     <SolidColorBrush x:Key="ButtonPressedBackgroundThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
     <SolidColorBrush x:Key="ButtonPressedForegroundThemeBrush" Color="{ThemeResource PhoneBackgroundColor}" />
-
-    <!-- ComboBox -->
-    <SolidColorBrush x:Key="ComboBoxBorderThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
-    <SolidColorBrush x:Key="ComboBoxForegroundThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
-    <SolidColorBrush x:Key="ComboBoxHighlightedBorderThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
-    <SolidColorBrush x:Key="ComboBoxItemSelectedForegroundThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
-    <SolidColorBrush x:Key="ComboBoxPressedBackgroundThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
-    <SolidColorBrush x:Key="ComboBoxPressedBorderThemeBrush" Color="{ThemeResource PhoneForegroundColor}" />
-    <SolidColorBrush x:Key="ComboBoxPressedForegroundThemeBrush" Color="{ThemeResource PhoneBackgroundColor}" />
 
     <!-- ProgressBar -->
     <x:String x:Key="ProgressBarIndeterminateForegroundThemeBrush">White</x:String>

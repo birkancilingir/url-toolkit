@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using UrlToolkit.Common;
@@ -69,7 +70,11 @@ namespace UrlToolkit.ViewModel
                         Debug.WriteLine("ExpandUrlCommand");
 
                         if (String.IsNullOrWhiteSpace(ShortenedUrlString))
+                        {
+                            ResourceLoader resourceLoader = new ResourceLoader();
+                            await AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("WebUrlIsRequiredErrorMessage"));
                             return;
+                        }
 
                         ConnectionProfile internetConnectionProfile = NetworkInformation.GetInternetConnectionProfile();
                         if (internetConnectionProfile == null || internetConnectionProfile.GetNetworkConnectivityLevel() != NetworkConnectivityLevel.InternetAccess)
@@ -79,13 +84,29 @@ namespace UrlToolkit.ViewModel
                             return;
                         }
 
-                        ExpandUrlFilter filter = new ExpandUrlFilter();
-                        filter.Url = ShortenedUrlString;
-                        filter.Format = ResponseFormat.JSON;
 
                         try
                         {
-                            Result = await _dataService.ExpandUrl(filter, ProjectUtilFunctions.getUserAgent(),
+                            // Try to read supported services file, if none is found download the services
+                            IList<Service> supportedServices = await LongUrlDataStore.ReadSupportedServicesFromDataStore();
+                            if (supportedServices == null)
+                            {
+                                ServicesFilter servicesFilter = new ServicesFilter();
+                                servicesFilter.Format = ResponseFormat.JSON;
+
+                                supportedServices = await _dataService.GetSupportedServicesList(servicesFilter, ProjectUtilFunctions.getUserAgent(),
+                                    () => { IsResultsLoading = true; },
+                                    () => { IsResultsLoading = false; }
+                                );
+
+                                await LongUrlDataStore.WriteSupportedServicesToDataStore(supportedServices);
+                            }
+
+                            ExpandUrlFilter expandUrlFilter = new ExpandUrlFilter();
+                            expandUrlFilter.Url = ShortenedUrlString;
+                            expandUrlFilter.Format = ResponseFormat.JSON;
+
+                            Result = await _dataService.ExpandUrl(expandUrlFilter, ProjectUtilFunctions.getUserAgent(),
                                 () => { IsResultsLoading = true; },
                                 () => { IsResultsLoading = false; }
                             );
