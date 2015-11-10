@@ -9,6 +9,6 @@ namespace UrlToolkit.DataService
     {
         Task<LongUrl> ExpandUrl(ExpandUrlFilter filter, String userAgent, Action onLoadingStarts, Action onLoadingEnds);
 
-        Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter, String userAgent);
+        Task<IList<Service>> GetSupportedServicesList(ServicesFilter filter, String userAgent, Action onLoadingStarts, Action onLoadingEnds);
     }
 }
