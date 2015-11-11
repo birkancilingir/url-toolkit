@@ -189,4 +189,7 @@
   <data name="WebUrlIsRequiredErrorMessage" xml:space="preserve">
     <value>URL cannot be empty.</value>
   </data>
+  <data name="ServiceNotSupportedErrorMessage" xml:space="preserve">
+    <value>This shortening service is not supported at the moment.</value>
+  </data>
 </root>

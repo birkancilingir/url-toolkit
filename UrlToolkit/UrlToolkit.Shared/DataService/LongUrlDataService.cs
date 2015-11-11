@@ -84,9 +84,9 @@ namespace UrlToolkit.DataService
                 JObject parsedString = JObject.Parse(jsonString);
 
                 ObservableCollection<Service> services = new ObservableCollection<Service>();
-                foreach (JObject service in parsedString.AsJEnumerable())
+                foreach (JToken service in parsedString.AsJEnumerable())
                 {
-                    Service mappedService = Service.mapItemToService(service);
+                    Service mappedService = Service.mapItemToService(service.First.Value<JObject>());
                     services.Add(mappedService);
                 }
 
