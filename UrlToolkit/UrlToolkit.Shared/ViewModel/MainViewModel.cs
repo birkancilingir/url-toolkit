@@ -84,7 +84,6 @@ namespace UrlToolkit.ViewModel
                             return;
                         }
 
-
                         try
                         {
                             // Try to read supported services file, if none is found download the services
@@ -100,6 +99,24 @@ namespace UrlToolkit.ViewModel
                                 );
 
                                 await LongUrlDataStore.WriteSupportedServicesToDataStore(supportedServices);
+                            }
+
+                            Boolean isServiceSupported = false;
+                            foreach (Service service in supportedServices)
+                            {
+                                if (ShortenedUrlString.StartsWith("http://" + service.Domain)
+                                    || ShortenedUrlString.StartsWith("https://" + service.Domain))
+                                {
+                                    isServiceSupported = true;
+                                    break;
+                                }
+                            }
+
+                            if (!isServiceSupported)
+                            {
+                                ResourceLoader resourceLoader = new ResourceLoader();
+                                await AlertService.ShowAlertAsync(resourceLoader.GetString("ErrorHeader"), resourceLoader.GetString("ServiceNotSupportedErrorMessage"));
+                                return;
                             }
 
                             ExpandUrlFilter expandUrlFilter = new ExpandUrlFilter();
