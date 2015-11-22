@@ -192,4 +192,10 @@
   <data name="ServiceNotSupportedErrorMessage" xml:space="preserve">
     <value>This shortening service is not supported at the moment.</value>
   </data>
+  <data name="TextBlockStatusExpanding" xml:space="preserve">
+    <value>Expanding URL...</value>
+  </data>
+  <data name="TextBlockStatusLoadingServiceList" xml:space="preserve">
+    <value>Loading Service List...</value>
+  </data>
 </root>

@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Birkan\documents\visual studio 2013\Projects\UrlToolkit\UrlToolkit\UrlToolkit.WindowsPhone\bin\ARM\Release\UrlToolkit.WindowsPhone_1.0.0.0_Bundle\UrlToolkit.WindowsPhone_1.0.0.0_ARM.appx
+SymbolPackage=C:\Users\Birkan\documents\visual studio 2013\Projects\UrlToolkit\UrlToolkit\UrlToolkit.WindowsPhone\AppPackages\UrlToolkit.WindowsPhone_1.0.0.0_Test\UrlToolkit.WindowsPhone_1.0.0.0_ARM.appxsym
