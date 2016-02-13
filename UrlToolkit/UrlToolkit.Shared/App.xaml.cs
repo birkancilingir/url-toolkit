@@ -18,6 +18,9 @@ using Windows.UI.Xaml.Navigation;
 using UrlToolkit.Common;
 using UrlToolkit.View;
 using UrlToolkit.DataService.Entities;
+using Windows.ApplicationModel.DataTransfer.ShareTarget;
+using Windows.ApplicationModel.DataTransfer;
+using System.Diagnostics;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -230,6 +233,32 @@ namespace UrlToolkit
                 ExceptionHandler.ReportException(e.Exception);
             }
             catch { }
+        }
+
+        protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        {
+            ShareOperation shareOperation = args.ShareOperation;
+            if (shareOperation.Data.Contains(StandardDataFormats.WebLink))
+            {
+                Uri shortenedUrl = await shareOperation.Data.GetWebLinkAsync();
+                if (shortenedUrl != null)
+                {
+                    SuspensionManager.SessionState["SharedUrl"] = shortenedUrl.AbsoluteUri;
+
+                    Frame rootFrame = new Frame();
+                    rootFrame.Navigate(typeof(MainView));
+                    Window.Current.Content = rootFrame;
+                    Window.Current.Activate();
+                }
+                else
+                {
+                    shareOperation.ReportCompleted();
+                }
+            }
+            else
+            {
+                shareOperation.ReportCompleted();
+            }
         }
     }
 }
