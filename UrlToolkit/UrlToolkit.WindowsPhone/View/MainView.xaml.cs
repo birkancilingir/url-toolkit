@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Navigation;
 using UrlToolkit.ViewModel;
 using UrlToolkit.DataService.Entities;
 using System.Diagnostics;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
@@ -72,6 +74,15 @@ namespace UrlToolkit.View
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
+                }
+            }
+            else if (SuspensionManager.SessionState.ContainsKey("SharedUrl"))
+            {
+                String url = SuspensionManager.SessionState["SharedUrl"] as String;
+                if (url != null)
+                {
+                    (this.DataContext as MainViewModel).ShortenedUrlString = url;
+                    (this.DataContext as MainViewModel).ExpandUrlCommand.Execute(null);
                 }
             }
         }

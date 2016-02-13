@@ -198,4 +198,10 @@
   <data name="TextBlockStatusLoadingServiceList" xml:space="preserve">
     <value>Loading Service List...</value>
   </data>
+  <data name="TextBlockVersion1_1_0_0.Text" xml:space="preserve">
+    <value>v1.1.0.0</value>
+  </data>
+  <data name="TextBlockVersion1_1_0_0_1.Text" xml:space="preserve">
+    <value>- URLs can now be directly shared to URL Toolkit.</value>
+  </data>
 </root>

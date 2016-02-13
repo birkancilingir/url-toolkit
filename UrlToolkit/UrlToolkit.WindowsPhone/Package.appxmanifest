@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="24714BRKN.URLToolkit" Publisher="CN=8C8304F4-63F6-4033-8B55-02098B83611B" Version="1.0.0.0" />
+  <Identity Name="24714BRKN.URLToolkit" Publisher="CN=8C8304F4-63F6-4033-8B55-02098B83611B" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="2a113364-cab9-42f5-9416-ed6b7435f017" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>URL Toolkit</DisplayName>
@@ -25,6 +25,13 @@
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#3182C1" />
       </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.shareTarget">
+          <ShareTarget m2:Description="Expand shortened URLs">
+            <DataFormat>WebLink</DataFormat>
+          </ShareTarget>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
